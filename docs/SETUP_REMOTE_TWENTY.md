@@ -23,6 +23,8 @@ corepack enable
 yarn install
 ```
 
+The first successful install must generate `yarn.lock`. Commit that lockfile before M1 is merged so dependency resolution is reproducible.
+
 ## Configure a remote
 
 Twenty SDK stores credentials in the user's Twenty CLI configuration, outside this repository.
