@@ -14,7 +14,7 @@ Canonical implementation of a mobile-first pharmacy field-sales CRM for Holista 
 **M1 — Twenty Foundation**
 
 Implemented in this branch:
-- Twenty App project structure aligned to SDK 2.46.0;
+- Twenty App project structure aligned to the released SDK 2.45.0;
 - Node 24.5 / Yarn 4 baseline;
 - application registration;
 - least-privilege initial function role;
