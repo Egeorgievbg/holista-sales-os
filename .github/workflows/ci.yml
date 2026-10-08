@@ -10,7 +10,9 @@ permissions:
   contents: read
 
 env:
-  TWENTY_VERSION: 2.46.0
+  TWENTY_VERSION: v2.45.0
+  TWENTY_API_URL: http://localhost:2021
+  TWENTY_API_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDIwMjAyMC05ZTNiLTQ2ZDQtYTU1Ni04OGI5ZGRjMmIwMzQiLCJ1c2VySWQiOiIyMDIwMjAyMC05ZTNiLTQ2ZDQtYTU1Ni04OGI5ZGRjMmIwMzQiLCJ3b3Jrc3BhY2VJZCI6IjIwMjAyMDIwLTFjMjUtNGQwMi1iZjI1LTZhZWNjZjdlYTQxOSIsIndvcmtzcGFjZU1lbWJlcklkIjoiMjAyMDIwMjAtMDY4Ny00YzQxLWI3MDctZWQxYmZjYTk3MmE3IiwidXNlcldvcmtzcGFjZUlkIjoiMjAyMDIwMjAtOWUzYi00NmQ0LWE1NTYtODhiOWRkYzJiMDM1IiwidHlwZSI6IkFDQ0VTUyIsImF1dGhQcm92aWRlciI6InBhc3N3b3JkIiwiaWF0IjoxNzM1Njg5NjAwLCJleHAiOjQ4OTE0NDk2MDB9.Ow8z-Dptg4LDiO2nApu5UQcX2a-gXdu_McalWs7Pgt8
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -23,11 +25,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Spawn Twenty test instance
-        id: twenty
-        uses: twentyhq/twenty/.github/actions/spawn-twenty-app-dev-test@main
-        with:
-          twenty-version: ${{ env.TWENTY_VERSION }}
+      - name: Start Twenty test instance
+        shell: bash
+        run: |
+          docker run -d             --name twenty-app-dev-test             -p 2021:2021             -e NODE_PORT=2021             -e SERVER_URL=http://localhost:2021             -e MARKETPLACE_CATALOG_SYNC_CRON_ENABLED=false             -e API_RATE_LIMITING_SHORT_LIMIT=100000             -e API_RATE_LIMITING_LONG_LIMIT=100000             twentycrm/twenty-app-dev:${TWENTY_VERSION}
+
+          echo "Waiting for Twenty test instance..."
+          timeout 180 bash -c 'until curl -sf http://localhost:2021/healthz >/dev/null; do sleep 3; done'
 
       - name: Enable Corepack
         run: corepack enable
@@ -51,6 +55,7 @@ jobs:
 
       - name: Integration tests
         run: yarn test
-        env:
-          TWENTY_API_URL: ${{ steps.twenty.outputs.server-url }}
-          TWENTY_API_KEY: ${{ steps.twenty.outputs.api-key }}
+
+      - name: Twenty logs on failure
+        if: failure()
+        run: docker logs twenty-app-dev-test 2>&1 | tail -150 || true
