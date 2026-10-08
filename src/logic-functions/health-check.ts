@@ -5,9 +5,7 @@ import { HEALTH_CHECK_UNIVERSAL_IDENTIFIER } from 'src/constants/universal-ident
 export default defineHealthCheck({
   universalIdentifier: HEALTH_CHECK_UNIVERSAL_IDENTIFIER,
   name: 'health-check',
-  handler: async () => ({
-    status: 'OK',
-    app: 'holista-sales-os',
-    milestone: 'M1',
-  }),
+  handler: async () => {
+    return { status: 'OK' };
+  },
 });
