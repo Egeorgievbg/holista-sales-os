@@ -4,7 +4,7 @@
 
 - Node.js: 24.5+
 - Yarn: 4.x via Corepack
-- Twenty SDK/client/UI: 2.46.0
+- Twenty SDK/client/UI: 2.45.0
 - Local Docker: **not required** when using an existing remote Twenty server/workspace.
 
 ## 1. Install dependencies
