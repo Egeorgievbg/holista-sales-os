@@ -1,20 +1,65 @@
 # PROJECT_STATE.md — Holista Sales OS
 
 Updated: 2026-10-08
-Status: INITIALISED / PRE-SCAFFOLD
+Status: M1 IMPLEMENTED / VERIFICATION BLOCKED
 Canonical repository: `Egeorgievbg/holista-sales-os`
 Default branch: `main`
+Working branch: `m1/twenty-app-foundation`
 
 ## Verified current state
 
 - Repository exists and is writable.
-- Repository was empty before project initialization.
 - `AGENTS.md` is the canonical engineering contract.
+- M1 implementation exists on `m1/twenty-app-foundation`.
+- Twenty app-development baseline was checked against upstream `create-twenty-app` / `twenty-sdk` 2.46.0.
+- The branch contains a Twenty application descriptor, least-privilege application role, `Pharmacy` smoke object, Holista standalone front component/page, navigation entry, health check and unit-test baseline.
 - No production database is connected.
 - No production deployment is configured.
-- No Twenty App scaffold has been committed yet.
 - No legacy code has been migrated yet.
-- No build, typecheck, test or browser QA result exists for this repository yet.
+- The app has NOT yet been synced into a Twenty development workspace.
+- Browser/mobile QA has NOT yet been performed.
+
+## M1 version baseline
+
+- create-twenty-app: 2.46.0
+- twenty-sdk: 2.46.0
+- twenty-client-sdk: 2.46.0
+- twenty-ui: 2.46.0
+- Node requirement: ^24.5.0
+- Yarn: 4.13.0
+- preferred development target: remote/non-production Twenty workspace, no local Docker requirement
+
+See `docs/TWENTY_BASELINE.md` and `docs/SETUP_REMOTE_TWENTY.md`.
+
+## M1 quality-gate status
+
+GitHub Actions run:
+- workflow: `M1 Quality Gate`
+- run id: `37791285621`
+- head SHA: `5b9dce43f50f0568073ee1496d32236894d931a9`
+- result: FAILURE BEFORE RUNNER START
+- job steps: 0
+- runner id: 0
+- downloadable job log: unavailable / no log blob
+
+Classification:
+`BLOCKED — GITHUB ACTIONS STARTUP/INFRASTRUCTURE`
+
+This is not evidence that Yarn install, lint, TypeScript typecheck or unit tests failed; none of those steps started.
+
+A separate container verification attempt was also unable to clone the public repository because the execution container could not resolve `github.com`. Therefore no local build claim is made.
+
+Current verification labels:
+- scaffold code: IMPLEMENTED
+- upstream contract/version inspection: VERIFIED
+- GitHub workflow dispatch: VERIFIED
+- dependency install: NOT VERIFIED
+- lint: NOT VERIFIED
+- TypeScript typecheck: NOT VERIFIED
+- unit tests: NOT VERIFIED
+- Twenty plan/apply: NOT VERIFIED
+- Twenty workspace sync: NOT VERIFIED
+- browser QA: NOT VERIFIED
 
 ## External/reference codebases
 
@@ -58,26 +103,33 @@ Expected useful areas:
 - Neon persistence pilot
 - offline/sync patterns
 
-## Current immediate objective
+## Immediate next gate
 
-Establish a clean Twenty App development baseline for Holista without forking or modifying Twenty core.
+On a machine with Node 24.5+ and network access:
 
-First development gate:
-1. scaffold the Holista Twenty App;
-2. connect it to a safe Twenty development workspace;
-3. create one test custom object;
-4. render one Holista custom UI component;
-5. run typecheck/build;
-6. document the exact verified commands and versions.
+1. `corepack enable`
+2. `yarn install`
+3. `yarn lint`
+4. `yarn typecheck`
+5. `yarn test:unit`
+6. configure an approved non-production Twenty remote with `yarn twenty remote:add`
+7. run `yarn twenty plan`
+8. review the plan for destructive/unexpected metadata changes
+9. run `yarn twenty apply`
+10. verify Holista navigation, front component and Pharmacy object in the workspace
+11. create/read/delete one disposable Pharmacy smoke record
+12. record evidence here
 
-## Architectural decision pending validation
+Do not merge M1 into `main` before the local/remote quality gate is verified.
+
+## Architectural decision
 
 Target strategy:
 - Twenty = generic CRM platform;
 - Holista Sales OS = custom Twenty App + supporting server integrations;
 - legacy repositories = selective migration sources.
 
-This strategy must be validated against the actual Twenty App SDK/API available in the selected Twenty version before domain implementation begins.
+The M1 scaffold follows the current Twenty App SDK model and does not modify Twenty core.
 
 ## First pilot scope
 

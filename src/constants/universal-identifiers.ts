@@ -1,0 +1,30 @@
+export const APP_DISPLAY_NAME = 'Holista Sales';
+export const APP_DESCRIPTION =
+  'Mobile-first pharmacy field-sales operating system for Holista / Revita.';
+
+export const APPLICATION_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f01';
+export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f02';
+export const HEALTH_CHECK_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f03';
+
+export const PHARMACY_OBJECT_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f10';
+export const PHARMACY_NAME_FIELD_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f11';
+export const PHARMACY_CITY_FIELD_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f12';
+export const PHARMACY_EXTERNAL_ID_FIELD_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f13';
+
+export const MAIN_PAGE_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f20';
+export const MAIN_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f21';
+export const MAIN_PAGE_LAYOUT_TAB_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f22';
+export const MAIN_PAGE_WIDGET_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f23';
+export const MAIN_PAGE_NAVIGATION_MENU_ITEM_UNIVERSAL_IDENTIFIER =
+  '3d5310ab-f3f0-4f27-8ca3-8b2bf6cc9f24';
